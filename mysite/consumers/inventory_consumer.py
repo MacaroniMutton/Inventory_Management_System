@@ -67,8 +67,6 @@ import os
 import sys
 import json
 import django
-from kafka import KafkaConsumer, KafkaProducer
-from messaging.kafka.producer import send_event
 
 # Setup path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,6 +78,8 @@ django.setup()
 from django.conf import settings
 from products.models import Product
 from stock.services import get_current_stock
+from kafka import KafkaConsumer, KafkaProducer
+from messaging.kafka.producer import send_event
 
 def safe_json(message):
     try:
@@ -124,5 +124,5 @@ for msg in consumer:
         }
 
         # producer.send("low-stock-alerts", alert_event)
-        send_event(producer, "stock-entry-logs", event)
+        send_event(producer, "low-stock-alerts", alert_event)
         print("🚨 Low stock event published:", alert_event)

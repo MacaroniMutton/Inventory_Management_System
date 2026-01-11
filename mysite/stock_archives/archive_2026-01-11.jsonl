@@ -79,3 +79,7 @@
 {"event_type": "STOCK_ENTRY_CREATED", "product_id": 1, "quantity": 20, "movement_type": "IN", "timestamp": "2026-01-11T08:44:44.879274+00:00"}
 {"event_type": "STOCK_ENTRY_CREATED", "product_id": 1, "quantity": 20, "movement_type": "IN", "timestamp": "2026-01-11T08:44:45.724491+00:00"}
 {"event_type": "STOCK_ENTRY_CREATED", "product_id": 1, "quantity": 20, "movement_type": "IN", "timestamp": "2026-01-11T08:44:46.474013+00:00"}
+{"event_type": "STOCK_ENTRY_CREATED", "product_id": 5, "quantity": 1, "movement_type": "OUT", "timestamp": "2026-01-11T19:22:40.185634+00:00"}
+{"event_type": "STOCK_ENTRY_CREATED", "product_id": 5, "quantity": 11, "movement_type": "IN", "timestamp": "2026-01-11T19:52:49.416859+00:00"}
+{"event_type": "STOCK_ENTRY_CREATED", "product_id": 5, "quantity": 10, "movement_type": "OUT", "timestamp": "2026-01-11T19:53:35.897373+00:00"}
+{"event_type": "STOCK_ENTRY_CREATED", "product_id": 5, "quantity": 11, "movement_type": "IN", "timestamp": "2026-01-11T19:54:34.252028+00:00"}

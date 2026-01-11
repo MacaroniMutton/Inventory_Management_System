@@ -44,6 +44,48 @@ services:
     ports:
       - "6379:6379"
 
+  web:
+    build: .
+    command: web
+    volumes:
+      - ./mysite:/app
+      - static_volume:/app/staticfiles
+    depends_on:
+      - redis
+      - kafka
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:29092
+      - REDIS_URL=redis://redis:6379/1
+  
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_volume:/app/staticfiles
+    depends_on:
+      - web
+
+  inventory_consumer:
+    build: .
+    command: consumer-inventory
+    depends_on: [kafka, redis]
+    volumes: [./mysite:/app]
+
+  alert_consumer:
+    build: .
+    command: consumer-alert
+    depends_on: [kafka, redis]
+    volumes: [./mysite:/app]
+
+  archive_cron:
+    build: .
+    command: cron
+    volumes:
+      - ./mysite:/app
+    depends_on: [kafka]
+
   statsd_exporter:
     image: prom/statsd-exporter:latest
     container_name: statsd_exporter
@@ -76,3 +118,6 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
+
+volumes:
+  static_volume:

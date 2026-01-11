@@ -27,9 +27,9 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,7 +118,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -160,6 +160,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -177,9 +178,9 @@ DEFAULT_FROM_EMAIL = f"Alert System <{EMAIL_HOST_USER}>"
 
 RESTOCK_THRESHOLD = 10
 
-KAFKA_BOOTSTRAP_SERVERS = ["localhost:9092"]
+KAFKA_BOOTSTRAP_SERVERS = ["kafka:29092"]
 
-STATSD_HOST = '127.0.0.1'
+STATSD_HOST = 'statsd_exporter'
 STATSD_PORT = 8125
 STATSD_PREFIX = 'inventory'
 STATSD_SAMPLE_RATE = 1.0

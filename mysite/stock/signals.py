@@ -1,6 +1,5 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from .kafka.producer import producer
 from .models import StockEntry
 from django.core.cache import cache
 from messaging.kafka.producer import send_event
@@ -20,7 +19,7 @@ def publish_stock_entry(sender, instance, created, **kwargs):
     }
 
     # producer.send("stock-entry-logs", event)
-    send_event(producer, "stock-entry-logs", event)
+    send_event("stock-entry-logs", event)
 
 
 @receiver([post_save, post_delete], sender=StockEntry)

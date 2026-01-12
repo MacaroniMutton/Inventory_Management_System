@@ -95,10 +95,10 @@ consumer = KafkaConsumer(
     value_deserializer=safe_json,
 )
 
-producer = KafkaProducer(
-    bootstrap_servers=settings.KAFKA_BOOTSTRAP_SERVERS,
-    value_serializer=lambda v: json.dumps(v).encode("utf-8"),
-)
+# producer = KafkaProducer(
+#     bootstrap_servers=settings.KAFKA_BOOTSTRAP_SERVERS,
+#     value_serializer=lambda v: json.dumps(v).encode("utf-8"),
+# )
 
 print("📦 Inventory consumer running...")
 
@@ -124,5 +124,5 @@ for msg in consumer:
         }
 
         # producer.send("low-stock-alerts", alert_event)
-        send_event(producer, "low-stock-alerts", alert_event)
+        send_event("low-stock-alerts", alert_event)
         print("🚨 Low stock event published:", alert_event)

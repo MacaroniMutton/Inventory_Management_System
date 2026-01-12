@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
-
+KAFKA_ENABLED = "true"
 
 # Application definition
 
@@ -185,3 +185,4 @@ STATSD_PORT = 8125
 STATSD_PREFIX = 'inventory'
 STATSD_SAMPLE_RATE = 1.0
 STATSD_DISABLED = False
+
